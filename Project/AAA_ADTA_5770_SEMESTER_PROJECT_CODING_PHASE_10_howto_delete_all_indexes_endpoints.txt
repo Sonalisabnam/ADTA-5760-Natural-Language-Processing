@@ -1,0 +1,101 @@
+#----------- ADTA 57770: SEMESTER PROJECT: PHASE 10: UN-DEPLOY INDEXES AND DELETE ALL INDEXES & ENDPOINTS
+
+
+# IMPORTANT NOTES: 
+# THE CODE IN THIS FILE IS ONLY USED WITH THE FOLLOWING ASSUMPTIONS
+# --) The code of all phases of the semester project is included in ONLY ONE Jupyter Notebook document
+# --) In other words, the developer complete all phases (1 - 10) in one notebook.
+
+# IMPORTANT NOTES: 
+# --) The develop have completed coding PHASE 1, 2, and 3 and run the code correctly before starting the code in this file
+
+
+#---- PHASE 10: STEP 1: Verify the list of currently existing end points
+
+# Get the list of end points that have been created
+
+list_end_points = aiplatform.MatchingEngineIndexEndpoint.list()
+
+print(f"List of indexes: {list_end_points}")
+
+
+#---- PHASE 10: STEP 2: Look for and take notes of numeric end point IDs
+# Look for the string of text starting with "resource name"
+# Look for a number (long sequence of digits) at the end of the string of text starting with "resource name"
+# Copy or take note that number: It is the numeric ID of an end point.
+# Copy or take note that number: It is the numeric ID of all end points displayed in the results of listing
+
+# ...
+
+#---- PHASE 10: STEP 3: UNDEPLOYED indexes and DELETE ALL end points
+
+# GET end points
+del_index_endpoint_1 = aiplatform.MatchingEngineIndexEndpoint("a numeric ID of some end point")
+del_index_endpoint_2 = aiplatform.MatchingEngineIndexEndpoint("a numeric ID of some end point")
+del_index_endpoint_3 = aiplatform.MatchingEngineIndexEndpoint("a numeric ID of some end point")
+# ... Continue until getting all end points listed above
+
+# Un-deploy indexes and delete end points
+del_index_endpoint_1.undeploy_all()
+del_index_endpoint_1.delete()
+
+del_index_endpoint_2.undeploy_all()
+del_index_endpoint_2.delete()
+
+del_index_endpoint_3.undeploy_all()
+del_index_endpoint_3.delete()
+
+# ... Continue until un-deploying all indexes and delete all end points listed above
+
+
+# Print out the list again to verify --> Should be empty: Nothing is printed out
+list_end_points = aiplatform.MatchingEngineIndexEndpoint.list()
+
+print(list_end_points)
+
+
+
+#---- PHASE 10: STEP 4: Verify the list of currently existing indexes
+
+# Get the list of indexes that have been created for the vector search system
+
+list_indexes = aiplatform.MatchingEngineIndex.list()
+
+print(f"List of indexes: {list_indexes}")
+
+
+#---- PHASE 10: STEP 5: Look for and take notes of numeric index IDs
+# Look for the string of text starting with "resource name"
+# Look for a number (long sequence of digits) at the end of the string of text starting with "resource name"
+# Copy or take note that number: It is the numeric ID of an index.
+# Copy or take note that number: It is the numeric ID of all indexes displayed in the results of listing
+
+# ...
+
+#---- PHASE 10: STEP 6: DELETE ALL indexes
+
+del_index_1 = aiplatform.MatchingEngineIndex("a numeric ID of some index")
+del_index_2 = aiplatform.MatchingEngineIndex("a numeric ID of some index")
+del_index_3 = aiplatform.MatchingEngineIndex("a numeric ID of some index")
+# ... Continue to get all indexes
+
+del_index_1.delete()
+del_index_2.delete()
+del_index_3.delete()
+# ... Continue until deleting all indexes
+
+# Verify that all indexes have been deleted --> The list should be empty: Nothing is printed out
+list_indexes = aiplatform.MatchingEngineIndex.list()
+
+print(list_indexes)
+
+
+###========================= AT THIS POINT:
+# All indexes have been un-deployed and deleted.
+# All end points have been deleted
+
+# COMPLETE SEMESTER PROJECT CODE: PHASE 10
+
+
+
+

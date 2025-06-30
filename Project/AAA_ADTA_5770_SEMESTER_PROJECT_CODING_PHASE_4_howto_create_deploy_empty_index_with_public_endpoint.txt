@@ -1,0 +1,113 @@
+#---- ADTA 57770: SEMESTER PROJECT: CODING: PHASE 4: CREATE & DEPLOY EMPTY INDEX WITH PUBLIC END POINT
+
+
+# IMPORTANT NOTES: 
+# THE CODE IN THIS FILE IS ONLY USED WITH THE FOLLOWING ASSUMPTIONS
+# --) The code of all phases of the semester project is included in ONLY ONE Jupyter Notebook document
+# --) In other words, the developer complete all phases (1 - 10) in one notebook.
+# --) CODE of PHASE 10 is not yet added!
+
+# IMPORTANT NOTES: 
+# --) The develop have completed coding PHASE 1, 2, and 3 and run the code correctly before starting the code in this file
+
+
+#---- PHASE 4: STEP 1: Verify the list of currently existing indexes and endpoints
+# NOTES: Either none or some already existing.
+
+# First, get the list of indexes that have been created for the vector search system
+
+list_indexes = aiplatform.MatchingEngineIndex.list()
+
+print(f"List of indexes: {list_indexes}")
+
+# Next, get the list of end-points that have been created
+
+list_end_points = aiplatform.MatchingEngineIndexEndpoint.list()
+
+print(f"List of indexes: {list_end_points}")
+
+#---- PHASE 4: STEP 2: DELETE ALL currently existing indexes and endpoints
+# SEE THE CODE OF HOW TO DELETE ALL EXISTING INDEXES AND ENDPOINTS IN ANOTHER DOCUMENT
+
+# ...
+# ...
+# ...
+
+#---- PHASE 4: STEP 3: VERIFY that NO  index and endpoint currently exist
+
+# Code of PHASE 4: STEP 1 should be HERE
+# ...
+
+# NOTES: Run the code and nothing is printed out --> The list is empty: GOOD!
+
+
+#---- PHASE 4: STEP 4: Create an empty index
+
+# Define constant identifiers: Text names of index and endpoint
+
+# The number of dimensions for the textembedding-005 is 768
+DIMENSIONS = 768
+
+A_XYZ_DISPLAY_INDEX_NAME = "a string name here, different from old names, if some names already used before"
+A_XYZ_DISPLAY_END_POINT_NAME = "a string name here, different from old names, if some names already used before"
+A_XYZ_DEPLOYED_INDEX_ID = "a string name here, different from old names, if some names already used before"
+
+
+#---- PHASE 4: STEP 5: Define text embedding model
+embedding_model = VertexAIEmbeddings(model_name="text-embedding-005")
+
+
+#---- PHASE 4: STEP 6: Create a new empty vector search index and verify it has been created successfully
+
+a_new_index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
+    display_name=A_XYZ_DISPLAY_INDEX_NAME,
+    dimensions=DIMENSIONS,
+    approximate_neighbors_count=150,
+    distance_measure_type="DOT_PRODUCT_DISTANCE",
+    index_update_method="STREAM_UPDATE"
+)
+
+if a_new_index:
+    print(a_new_index.name)
+
+list_indexes = aiplatform.MatchingEngineIndex.list()
+
+print(list_indexes)
+
+
+#---- PHASE 4: STEP 7: Create a new index ednpoint and verify it has been created successfully
+
+a_new_endpoint = aiplatform.MatchingEngineIndexEndpoint.create(
+    display_name=A_XYZ_DISPLAY_END_POINT_NAME,
+    public_endpoint_enabled=True
+)
+
+if a_new_endpoint:
+    print(a_new_endpoint.name)
+
+list_end_points = aiplatform.MatchingEngineIndexEndpoint.list()
+
+print(list_end_points)
+
+
+#---- PHASE 4: STEP 8: Deploy the newly created index with a public endpoint
+
+a_new_endpoint = a_new_endpoint.deploy_index(
+    index=a_new_index,
+    deployed_index_id=A_XYZ_DEPLOYED_INDEX_ID
+)
+
+a_new_endpoint.deployed_indexes
+
+
+
+###========================= AT THIS POINT:
+# A new empty vector search index has been successfully created.
+# A new index end point has been successfully created.
+# The newly created index has been deployed with a public end point successfully
+
+# COMPLETE SEMESTER PROJECT CODE: PHASE 4 --> READY FOR PHASE 5: EMDBEDDING PDF FILES
+
+
+
+
