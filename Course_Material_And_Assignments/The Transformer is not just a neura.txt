@@ -1,0 +1,109 @@
+The Transformer is not just a neural network. 
+The Transformer’s revolutionary features have led to disruptive stunning achievements and advancements in many AI fields such as Natural Language Understanding (NLU), Language Generation, and Conversational AI, to name a few. 
+The Transformer will remain a foundational neural network that continues shaping the future of language-based artificial intelligence (AI), especially the generative AI and conversational AI. Its impacts on society will be deep and broad.
+
+“Attention Is All You Need!”
+The Transformer and Attention-Based Neural Networks: A revolution in the world of Artificial Intelligence (AI) Natural Language Processing (NLP). 
+ 
+Encoder-Decoder
+Foundational Revolutionary Core Features:
+•	Parallelize Computations: Transformers discard the sequential processing paradigm of earlier recurrent neural networks (RNNs) in favor of parallel computation facilitated by attention mechanisms. This dramatically speeds up training and inference.
+•	Handle Long-Range Dependencies: RNNs tend to struggle with longrange dependencies within sequences. The Transformer, through its attention mechanism, directly calculates relationships between any two elements in the sequence, regardless of distance, fostering a better grasp of context.
+
+•Encoder: The encoder's job is to process the input sequence (for example, a sentence of text) and generate a rich, contextualized representation of that input.
+•Decoder: The decoder takes the encoder's output and, in an auto-regressive manner (one step at a time), generates the target sequence (for example, a translation of the sentence).
+
+Multi-Head Attention Mechanism: Heart and Mind of the Transformer. It works as follows:
+•	Queries, Keys, and Values: For each word in the input sequence, the Transformer creates three vectors: a query vector (Q), a key vector (K), and a value vector (V). These vectors are learned representations of the word itself.
+•	Scaled Dot-Product Attention: The query vector of a word is compared to the key vectors of all words in the sequence, including itself. Similarity scores (via dot product) are calculated, and softmax is applied to normalize these scores into probabilities. These represent how much "attention" a word should pay to each other word.
+•	Weighted Sum: Finally, the value vectors are multiplied by their corresponding attention scores and summed up. This becomes the attention-enhanced output representation of the current word.
+•	Multi-Head: Multiple sets of these Q, K, V transformations happen in parallel (forming "heads"), creating multiple diverse representations of each word. These representations are concatenated and linearly projected to yield a final unified representation for each word.
+
+
+Attention – The Game Changer:  
+•	The self-attention mechanism allows the model to weigh the importance of different words in an input sequence.
+•	Thereby, the transformer can effectively understand the interconnected nuances of language that can span further distances within a sentence or paragraph.
+
+
+Multi-Head Self-Attention: Where the magic happens:
+•	Self-attention allows each word within the input sequence to "attend" to all other words and determine how relevant each is in providing context.  
+
+•	Multi-head attention performs this calculation multiple times in parallel, with each 'head'  learning to focus on different aspects of the relationships between words. 
+•	This multi-faceted approach enriches the representation of each word.
+
+Positional Encoding: Because Transformers don't process sequences recurrently, the position of words within a sequence needs to be explicitly encoded. The Transformer injects positional information through vectors called positional encodings, with unique representations for each position in the sequence.
+Feed-Forward Networks: Both the encoder and decoder layers include pointwise, fully-connected feed-forward neural networks. These networks add further non-linear transformations to the attention-based output, enhancing the model's expressiveness.
+
+
+Main Layers of the Transformer: Encoder
+•	Input Embeddings: The input words are converted into word embeddings (dense vector representations).
+•	Multi-Head Attention (Self-Attention): Words "attend" to each other within the input sequence.
+•	Layer Normalization: Help stabilization during training.
+•	Feed-Forward Network: Further refine the representations of words
+•	Residual Connections: Shortcut connections add the input to the output of each sub-layer, making training more manageable.
+A Transformer has stacked encoder layers (usually 6 or more), with each layer refining the representations of words or contents from the previous.
+
+
+Main Layers of the Transformer: Decoder
+•	Masked Multi-Head Attention: Ensure, during output generation, that dependencies only consider previously generated words (auto-regressive property).
+•	Encoder-Decoder Attention: Connect decoder to encoder output, helping it focus on relevant areas of the input sequence.
+•	Layer Normalization
+•	Feed-Forward Network
+•	Residual Connections
+•	Final Linear Layer and Softmax: Transform the decoder's output into logits (raw predictions) and further into a probability distribution over the vocabulary.
+-----------------------------------------------------------------
+First, Embedding Layer and Positional Encoder transform the words into respective vectors.
+	•	Similar to what has been done in the Encoder.
+TO DO: Find out how relevant a particular word (French) is w.r.t to other words in that sentence. 
+OUTPUT: Attention vectors
+•	Each vector represents the relevance of a word (French) w.r.t other words.
+Every word →An attention vector
+•	Capture the contextual relationship between the word (French) and other words in that sentence.
+“Masked”: Learning mechanism in artificial neural networks (ANN):
+•	Give an English word.
+•	First, the transformer translates the English word into the French version by itself using previous results.
+•	Then the transformer matches and compares the predicted French word with the actual correct French word that is fed into the decoder block. 
+•	After comparing both, the transformer updates its matrix value, through which the transformer can learn the correct translation after several iterations.
+“Masked”: Learning mechanism in artificial neural networks (ANN):
+•	To teach the transformer and make it learn better: Hide or mask the next French word.
+•	At first the transformer predicts the next word by itself using previous results, without knowing the real translated word. 
+•	Of course, it makes no sense if it is shown the next French word →Hide or mask the actual French word.
+“Masked”: Learning mechanism in artificial neural networks (ANN):
+ENCODER:
+•	It is possible to take any word from the English sentence.
+DECODER:
+•	It is possible to only take the previous word of the French sentence.
+Therefore, while performing the parallelization with matrix operation, it should ensure the matrix should mask the words appearing later by transforming them into 0’s so that the attention network (decoder) cannot use them.
+Decoder: Multi-Head Attention (Self-Attention)
+a.k.a. Encoder-Decoder Attention Block:
+•	The resulting attention vectors from the previous decoder layer are passed into the Decoder Multi-Head Attention Block. 
+•	The attention vectors from the Encoder Block are also passed into the Decoder Multi-Head Attention Block. 
+•	The results from the encoder block comes into the picture. 
+•	That’s why it is called Encoder-Decoder Attention Block.
+Decoder: Multi-Head Attention (Self-Attention)
+a.k.a. Encoder-Decoder Attention Block:
+•	There is one vector of every word for each English and French sentence. 
+•	This block (Multi-Head Attention in Decoder)
+•	Do the mapping of English and French words
+•	Find out the relation between English and French words. 
+Therefore, Multi-Head Attention in Decoder: 
+•	Where the main English to French word mapping happens
+Decoder: Multi-Head Attention (Self-Attention)
+a.k.a. Encoder-Decoder Attention Block:
+OUTPUTS: 
+•	Attention vectors for every word in English and French sentences.
+•	Each vector represents the relationship with other words in both languages.
+Decoder: Feed Forward Neural Networks (FFNN): Linear Layers
+•	Each attention vector is passed into a feed-forward neural network.
+•	FFNN transforms output vectors into some form which is easily acceptable by another decoder block or a linear layer.
+•	A Linear Layer, a.k.a. Flattened Layer, is a feed-forward layer belonging to the feed forward neural network. 
+•	It is used to expand the dimensions into numbers of words in the French language after translation.
+
+Decoder: Softmax Layer
+•	The outputs from the last Feed Forward Linear Layer are passed through a Softmax Layer, 
+•	Transform the input into a probability distribution.
+•	The final outputs are resulting words produced with the highest probability after translation.
+
+
+
+
